@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Function</title>
-    <style>
+    <link rel="stylesheet" href="style.css">
+    <!-- <style>
       body {
         background-color: rgb(226, 226, 226);
         font-family:Arial, Helvetica, sans-serif;
@@ -64,7 +65,7 @@
         padding: 10px;
         cursor: pointer;
       }
-    </style>
+    </style> -->
 </head>
 <body>
     <main>
@@ -90,72 +91,11 @@
       <p class="js-score score"></p>
 
       <button class="reset-score-btn" onclick="resetScore()">Reset Score</button>
+      <button class="auto-play-btn" onclick="autoPlay()">Auto Play</button>
       <!-- <p id="resultDisplay"></p>
       <span id="win"></span> <span id="lose"></span> <span id="tie"></span> -->
     </main>
 
-    <script>
-      let score = JSON.parse(localStorage.getItem('score'));
-
-      console.log(score);
-
-      if (score === null) {
-        score = {
-          wins: 0,
-          losses: 0,
-          ties: 0
-        };
-      }
-
-      function playGame(playerMove) {
-        const moves = ["Rock", "Paper", "Scissors"];
-        const computerIndex = Math.floor(Math.random() * 3);
-        const computerMove = moves[computerIndex];
-
-        let result = "";
-        if (playerMove === computerMove) {
-            result = "Tie.";
-            score.ties++;
-        } else {
-            if ((playerMove === "Rock" && computerMove === "Scissors") ||
-                (playerMove === "Paper" && computerMove === "Rock") ||
-                (playerMove === "Scissors" && computerMove === "Paper")
-            ) {
-                result = "You win.";
-                score.wins++;
-            } else {
-                result = "You lose.";
-                score.losses++;
-            }
-        }
-
-        localStorage.setItem('score', JSON.stringify(score));
-
-        const displayResult = document.querySelector(".js-result");
-        displayResult.textContent = `${result}`;
-
-        const displayMove = document.querySelector(".js-moves");
-        const lCPlayerMove = playerMove.toLowerCase();
-        const lCComputerMove = computerMove.toLowerCase();
-        displayMove.innerHTML = 
-        `You: <img src="rock-paper-scissors/${lCPlayerMove}.png" class="move-icon">
-        <img src="rock-paper-scissors/${lCComputerMove}.png" class="move-icon"> :Computer`;
-
-        console.log(`${playerMove}`)
-        const displayScore = document.querySelector(".js-score");
-        displayScore.textContent = `Wins: ${score.wins}. ` + `Losses: ${score.losses}. ` + `Ties: ${score.ties}`;
-      }
-
-      function resetScore() {
-        score.losses = 0;
-        score.ties = 0;
-        score.wins = 0;
-
-        localStorage.removeItem('score');
-
-        const resultDisplay = document.querySelector(".js-score");
-        resultDisplay.textContent = `Wins: ${score.wins}. ` + `Losses: ${score.losses}. ` + `Ties: ${score.ties}`;
-      }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
